@@ -1,0 +1,20 @@
+# Ignore object and library files
+*.o
+*.a
+*.obj
+*.lib
+# Ignore the tester output
+tester
+# Ignore .txt files
+*.txt
+# Ignore VS build folders
+**/[Dd]ebug
+**/[Rr]elease
+
+# Ignore User-specific files
+*.rsuser
+*.suo
+*.user
+
+# Ignore VS cache/options directory
+.vs/
