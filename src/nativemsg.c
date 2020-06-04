@@ -2,7 +2,7 @@
 #include "errmacros.h"
 
 // Reads the message sent by the browser extension from stdin
-uint8_t* nativemsg_read_message(uint32_t* length)
+uint8_t* nativemsg_read(uint32_t* length)
 {
     size_t count;
     int err;
@@ -12,7 +12,7 @@ uint8_t* nativemsg_read_message(uint32_t* length)
     uint8_t* buffer = malloc(*length * sizeof(*buffer));
     if (buffer == NULL)
     {
-        fprintf(stderr, "An error occured while allocating memory for buffer");
+        fprintf(stderr, "An error occured while allocating memory for buffer\n");
         return NULL;
     }
     count = fread(buffer, sizeof(*buffer), *length, stdin);
@@ -22,12 +22,12 @@ uint8_t* nativemsg_read_message(uint32_t* length)
 }
 
 // Writes the given message to be read by the browser extension in stdout
-size_t nativemsg_write_message(const uint8_t* const buffer, uint32_t length)
+size_t nativemsg_write(const uint8_t* const buffer, uint32_t length)
 {
     size_t count;
     int err;
     if (length > (1024 * 1024)) {
-        fprintf(stderr, "Message too large");
+        fprintf(stderr, "Message too large\n");
         return 0;
     }
     count = fwrite(&length, sizeof(uint32_t), 1, stdout);
