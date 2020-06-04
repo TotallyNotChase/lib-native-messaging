@@ -10,6 +10,8 @@ Simple, a way to establish communication between a browser extension and a nativ
 * [Mozilla Firefox](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)
 * [Google Chrome](https://developer.chrome.com/extensions/nativeMessaging)
 
+![MDN_example](https://media.prod.mdn.mozit.cloud/attachments/2016/08/31/13833/81ec4685b1f9f8745e12d96fdb5b33a8/native-messaging.png)
+
 # Installation
 * On Linux-
 
