@@ -15,7 +15,7 @@ HEADER = nativemsg
 	$(CC) -c -o $@ $< $(BUILD_CFLAGS)
 
 build: $(OBJ)
-	mkdir build
+	@mkdir build
 	$(AR) rcs $@/lib$(LIBNAME).a $^
 
 install: build
