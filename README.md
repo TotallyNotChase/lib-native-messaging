@@ -96,7 +96,7 @@ If you'd like to test the library prior to installation-
   
   Or you can go to properties -> Linker -> Input -> Additional Dependencies -> Type in `nativemsg.lib`
 
-## `uint8_t* nativemsg_read_message(uint32_t* length)`
+## `uint8_t* nativemsg_read(uint32_t* length)`
 Reads the message sent the by browser extension and returns a uint8_t pointer to it
 
 The pointer should be freed using `free()`
@@ -107,13 +107,13 @@ Returns NULL on failure
 
 The corresponding error is written to stderr
 
-Usage: `uint8_t* msg = nativemsg_read_message(&len);`
+Usage: `uint8_t* msg = nativemsg_read(&len);`
 
 Where `len` is a variable of type `uint32_t`
 
 **NOTE**: The returned pointer does not include a null terminator
 
-## `size_t nativemsg_write_message(const uint8_t* const buffer, uint32_t length)`
+## `size_t nativemsg_write(const uint8_t* const buffer, uint32_t length)`
 Writes given message for the browser extension to read
 
 @param: buffer - pointer to the array of bytes to be written
@@ -130,7 +130,7 @@ Returns 0 on failure
 
 The corresponding error is written to stderr
 
-Usage: `size_t count = nativemsg_write_message((uint8_t*)"{\"msg\":\"pong\"}", 14);`
+Usage: `size_t count = nativemsg_write((uint8_t*)"{\"msg\":\"pong\"}", 14);`
 
 This should return `14 + 4` = `18` on success
 
@@ -143,7 +143,7 @@ Assume the sent message is the JSON - `{text: "ping"}`
   uint32_t len;
   // Read the message
   uint8_t* msg = NULL;
-  msg = nativemsg_read_message(&len);
+  msg = nativemsg_read(&len);
   if (msg == NULL)
   {
     exit(EXIT_FAILURE);
@@ -154,10 +154,10 @@ Assume the sent message is the JSON - `{text: "ping"}`
   {
     // Message was 'ping', wrappned inside a json
     // Valid
-    if (nativemsg_write_message((uint8_t*)"{\"msg\":\"pong\"}", 14) != 18)
+    free(msg);
+    if (nativemsg_write((uint8_t*)"{\"msg\":\"pong\"}", 14) != 18)
     {
         // Wrong number of bytes written - not (14 + 4)
-        free(msg);
         exit(EXIT_FAILURE);
     }
   }
@@ -169,7 +169,7 @@ Assume the sent message is the JSON - `{text: "ping"}`
   uint8_t* msg = NULL;
   while(1)
   {
-    msg = nativemsg_read_message(&len);
+    msg = nativemsg_read(&len);
     if (msg == NULL)
     {
       exit(EXIT_FAILURE);
@@ -180,10 +180,10 @@ Assume the sent message is the JSON - `{text: "ping"}`
     {
       // Message was 'ping', wrappned inside a json
       // Valid
-      if (nativemsg_write_message((uint8_t*)"{\"msg\":\"pong\"}", 14) != 18)
+      free(msg);
+      if (nativemsg_write((uint8_t*)"{\"msg\":\"pong\"}", 14) != 18)
       {
           // Wrong number of bytes written - not (14 + 4)
-          free(msg);
           exit(EXIT_FAILURE);
       }
     }
