@@ -200,7 +200,7 @@ The below examples are meant from **chrome** but there's not a major difference 
 They both also send the same json mentioned above: `{text: "ping"}` and expect the json: `{msg: "pong"}`
 
 The native host app is named `pingpong`
-* ## Sample extension - Connectionless
+* ## Connectionless Messaging
   ```js
   var start;
 
@@ -215,7 +215,7 @@ The native host app is named `pingpong`
       console.log(`Received: ${res.msg}, Took: ${end - start} ms`);
   }
   ```
-* ## Sample extension - Connectionful
+* ## Connectionful Messaging
   ```js
   var start;
   var port = chrome.runtime.connectNative('pingpong');
